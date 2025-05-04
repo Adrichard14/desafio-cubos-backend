@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
-import { AutenticacaoService } from '../services/AutenticacaoService';
+import { AuthService } from '../services/AuthService';
 
-export class AutenticacaoController {
-    private authService: AutenticacaoService;
+export class AuthController {
+    private authService: AuthService;
 
     constructor() {
-        this.authService = new AutenticacaoService();
+        this.authService = new AuthService();
     }
 
-    async autenticar(req: Request, res: Response, next: NextFunction) {
+    async login(req: Request, res: Response, next: NextFunction) {
         try {
-            const responseAuth = await this.authService.autenticar(req.body);
+            const responseAuth = await this.authService.login(req.body);
             res.status(200).json(responseAuth);
         } catch (error: any) {
             return next(error);

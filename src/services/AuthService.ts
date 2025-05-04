@@ -8,14 +8,14 @@ import {
 import { AutenticaUsuarioDTO, ResponseUsuarioAutenticado } from '../types/Auth';
 import jwt from 'jsonwebtoken';
 
-export class AutenticacaoService {
+export class AuthService {
     private userRepository: UserRepository;
 
     constructor() {
         this.userRepository = new UserRepository();
     }
 
-    async autenticar(
+    async login(
         dadosUsuario: AutenticaUsuarioDTO
     ): Promise<ResponseUsuarioAutenticado> {
         const user = await this.verifyUser(
@@ -42,24 +42,13 @@ export class AutenticacaoService {
     }
 
     async verifyUser(dados: AutenticaUsuarioDTO) {
-        if (!dados.email && !dados.phone) {
-            throw new ValidationError('Informe e-mail ou telefone');
-        }
-
-        if (!dados.password) {
-            throw new ValidationError('Senha não informada');
-        }
-
         let user = null;
 
         if (dados.email) {
             user = await this.userRepository.findByEmail(dados.email);
         }
-
-        if (!user && dados.phone) {
-            user = await this.userRepository.findByTelefone(
-                dados.phone
-            );
+        if (!dados.password) {
+            throw new ValidationError('Senha não informada');
         }
 
         if (!user) {

@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 app.use(
     cors({
-        origin: ['http://localhost:4000'],
+        origin: ['http://localhost:5173'],
     })
 );
 app.use('/api', userRoute);

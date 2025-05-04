@@ -29,15 +29,18 @@ model Movie {
   title      String?
   genres      String?
   original_title      String?
-  vote_average      Int?
+  vote_average      String?
   overview      String?
   status      String?
   tagline      String?
-  budget      Int?
-  runtime      Int?
-  revenue      Int?
-  popularity      Int?
-  vote_count      Int?
+  budget      String?
+  runtime      String?
+  profit       String?
+  revenue      String?
+  popularity      String?
+  vote_count      String?
   original_language      String?
-  release_date  DateTime?
+  backdrop_path      String?
+  poster_path      String?
+  release_date  String?
 }
