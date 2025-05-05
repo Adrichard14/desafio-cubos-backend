@@ -5,7 +5,7 @@ import {
     UnprocessableEntityError,
     ValidationError,
 } from '../errors/customErrors';
-import { AutenticaUsuarioDTO, ResponseUsuarioAutenticado } from '../types/Auth';
+import { AutenticateUserDTO, ResponseAutenticatedUser } from '../types/Auth';
 import jwt from 'jsonwebtoken';
 
 export class AuthService {
@@ -16,10 +16,10 @@ export class AuthService {
     }
 
     async login(
-        dadosUsuario: AutenticaUsuarioDTO
-    ): Promise<ResponseUsuarioAutenticado> {
+        userData: AutenticateUserDTO
+    ): Promise<ResponseAutenticatedUser> {
         const user = await this.verifyUser(
-            dadosUsuario
+            userData
         );
 
         const JWTSECRET = this.getJWTSecret();
@@ -41,7 +41,7 @@ export class AuthService {
         };
     }
 
-    async verifyUser(dados: AutenticaUsuarioDTO) {
+    async verifyUser(dados: AutenticateUserDTO) {
         let user = null;
 
         if (dados.email) {
@@ -60,8 +60,8 @@ export class AuthService {
         return user;
     }
 
-    async verificaSenhaUsuario(senhaRequest: string, senhaUsuario: string) {
-        const senhaCorreta = await bcrypt.compare(senhaRequest, senhaUsuario);
+    async verificaSenhaUsuario(password: string, realUserPwd: string) {
+        const senhaCorreta = await bcrypt.compare(password, realUserPwd);
 
         if (!senhaCorreta) {
             throw new ValidationError('Credenciais inválidas.');

@@ -13,7 +13,7 @@ export class UserService {
     }
 
     async createUser(newUser: CreateUserDTO) {
-        const requiredFields: Array<keyof CreateUserDTO> = ['name', 'email', 'password', 'confirmPassword', 'phone'];
+        const requiredFields: Array<keyof CreateUserDTO> = ['name', 'email', 'password', 'confirmPassword'];
         for (const field of requiredFields) {
             if (newUser[field] === undefined) {
                 throw new ValidationError(
@@ -21,8 +21,7 @@ export class UserService {
                 );
             }
         }
-        const { name, email, password, confirmPassword, phone } = newUser;
-
+        const { name, email, password, confirmPassword } = newUser;
         if (password !== confirmPassword) {
             throw new ValidationError(
                 'A senha e a confirmação de senha precisam ser iguais!'
@@ -39,7 +38,6 @@ export class UserService {
             name,
             email,
             password: encryptedPassword,
-            phone
         });
     }
 
@@ -55,16 +53,6 @@ export class UserService {
         if (userAlreadyExists) {
             throw new ValidationError(
                 'Já existe um usuário cadastrado com esse e-mail'
-            );
-        }
-
-        const phoneAlreadyInUse = await this.userRepository.findByTelefone(
-            user.phone
-        );
-
-        if (phoneAlreadyInUse) {
-            throw new ValidationError(
-                'Já existe um usuário cadastrado com esse telefone'
             );
         }
     }

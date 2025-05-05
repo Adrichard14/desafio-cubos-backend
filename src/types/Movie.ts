@@ -7,14 +7,14 @@ export interface CreateMovieDTO {
     status?: string;
     tagline?: string;
     budget?: string;
-    runtime?: string;
+    runtime?: any;
     revenue?: string;
     popularity?: string;
     vote_count?: string;
     original_language?: string;
-    release_date?: string;
-    backdrop_path?: string;
+    release_date?: any;
+    backdrop_path?: string | undefined | null;
     profit?: string;
-    poster_path?: string;
+    poster_path?: string | undefined | null;
 }
 

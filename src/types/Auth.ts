@@ -1,9 +1,8 @@
-export interface AutenticaUsuarioDTO {
+export interface AutenticateUserDTO {
     email: string | null;
     password: string;
-    phone: string | null;
 }
-export interface ResponseUsuarioAutenticado {
+export interface ResponseAutenticatedUser {
     accessToken: string;
     message: string;
 }

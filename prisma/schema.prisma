@@ -18,7 +18,6 @@ model User {
   id        Int      @id @default(autoincrement())
   name      String
   email     String   @unique
-  phone      String @unique
   active      Boolean @default(true)
   password     String
   created_at  DateTime @default(now())
@@ -34,7 +33,7 @@ model Movie {
   status      String?
   tagline      String?
   budget      String?
-  runtime      String?
+  runtime       Int?
   profit       String?
   revenue      String?
   popularity      String?
@@ -42,5 +41,6 @@ model Movie {
   original_language      String?
   backdrop_path      String?
   poster_path      String?
-  release_date  String?
+  release_date  DateTime?
+  trailer String?
 }

@@ -9,10 +9,6 @@ export class UserRepository {
         return prisma.user.findUnique({ where: { email } });
     }
 
-    async findByTelefone(phone: string) {
-        return prisma.user.findUnique({ where: { phone } });
-    }
-
     async findAll() {
         return prisma.user.findMany({
             omit: {
