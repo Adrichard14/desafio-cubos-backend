@@ -10,7 +10,13 @@ Execute o seguinte comando para iniciar o container do PostgreSQL:
 
 ```bash
 docker-compose up -d
-
+```
 Aplique todas as migrations existentes no banco de dados:
+
 ```bash
 npx prisma migrate deploy
+```
+
+## Configurando o .env
+
+Antes de iniciar o projeto é necessário definir as variáveis de exemplo do .env, utilizando como base o .env.example. 
